@@ -35,9 +35,20 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: example.core.ExampleLambda
+      Layers:
+        - !Ref BabashkaSelfManagedLambdaLayer
       Events:
         HelloEvent:
           Type: Api
           Properties:
             Path: /
             Method: get
+
+  BabashkaSelfManagedLambdaLayer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      LayerName: BabashkaSelfManagedLambdaLayer
+      ContentUri: ./holy-lambda-babashka-runtime
+      CompatibleRuntimes:
+        - provided
+      RetentionPolicy: Retain
