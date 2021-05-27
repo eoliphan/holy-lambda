@@ -238,7 +238,7 @@ Check https://docs.aws.amazon.com/serverless-application-model/latest/developerg
 (def PACKAGED_TEMPLATE_FILE ".holy-lambda/packaged.yml")
 (def BABASHKA_RUNTIME_LAYER_FILE ".holy-lambda/babashka-runtime/template.yml")
 (def SELF_MANAGE_LAYERS? (:self-manage-layers? OPTIONS))
-(def NATIVE_CONFIGURATIONS_PATH ".holy-lambda/native/configuration")
+(def NATIVE_CONFIGURATIONS_PATH "resources/native-configuration")
 (def BOOTSTRAP_FILE (:bootstrap-file RUNTIME))
 (def NATIVE_DEPS_PATH (:native-deps RUNTIME))
 (def BABASHKA_LAYER_INSTANCE (str BUCKET_NAME "-hlbbri-" (s/replace RUNTIME_VERSION #"\." "-")))
