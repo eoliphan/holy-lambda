@@ -1133,7 +1133,8 @@ set -e
   (print-task "docker:build:ee")
   (hpr  (accent "Building GraalVM EE docker image"))
   (spit "Dockerfile.ee" (:body (curl/get "https://raw.githubusercontent.com/FieryCod/holy-lambda/master/docker/ee/Dockerfile")))
-  (shell "docker build . -f Dockerfile.ee -t fierycod/graalvm-native-image:ee")
+  (hpr (str  "docker build . " (when (:network DOCKER) (str "--network=" (:network DOCKER))) " -f Dockerfile.ee -t fierycod/graalvm-native-image:ee"))
+  (shell (str  "docker build . " (when (:network DOCKER) (str "--network=" (:network DOCKER))) " -f Dockerfile.ee -t fierycod/graalvm-native-image:ee"))
   (shell "rm -rf Dockerfile.ee"))
 
 (defn stack:lint
