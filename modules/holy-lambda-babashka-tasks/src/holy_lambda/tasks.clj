@@ -425,15 +425,16 @@ Check https://docs.aws.amazon.com/serverless-application-model/latest/developerg
   [command]
   (apply shell
          (concat
-          ["docker run --rm"
-           "-e" "AWS_CREDENTIAL_PROFILES_FILE=/project/.aws/credentials"
-           "-e" "AWS_CONFIG_FILE=/project/.aws/config"
-           "-v" (str (.getAbsolutePath (io/file "")) ":/project")
-           "-v" (str AWS_DIR ":" "/project/.aws:ro")]
-          (flatten (mapv (fn [path] ["-v" path]) DOCKER_VOLUMES))
-          ["--user" USER_GID
-           "-it" IMAGE_CORDS
-           "/bin/bash" "-c" command]))
+           ["docker run --rm"]
+           (when (:network DOCKER) [(str "--network=" (:network DOCKER))])
+           ["-e" "AWS_CREDENTIAL_PROFILES_FILE=/project/.aws/credentials"
+            "-e" "AWS_CONFIG_FILE=/project/.aws/config"
+            "-v" (str (.getAbsolutePath (io/file "")) ":/project")
+            "-v" (str AWS_DIR ":" "/project/.aws:ro")]
+           (flatten (mapv (fn [path] ["-v" path]) DOCKER_VOLUMES))
+           ["--user" USER_GID
+            "-it" IMAGE_CORDS
+            "/bin/bash" "-c" command]))
   (shell "rm -Rf .aws"))
 
 (defn deps-sync--babashka
