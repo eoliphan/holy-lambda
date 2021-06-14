@@ -129,7 +129,7 @@
 
 (def AVAILABLE_RUNTIMES #{:babashka :native :java})
 (def AVAILABLE_REGIONS #{"us-east-2", "us-east-1", "us-west-1", "us-west-2", "af-south-1", "ap-east-1", "ap-south-1", "ap-northeast-3", "ap-northeast-2", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ca-central-1", "cn-north-1", "cn-northwest-1", "eu-central-1", "eu-west-1", "eu-west-2", "eu-south-1", "eu-west-3", "eu-north-1", "me-south-1", "sa-east-1"})
-(def REMOTE_TASKS "https://raw.githubusercontent.com/FieryCod/holy-lambda/master/modules/holy-lambda-babashka-tasks/src/holy_lambda/tasks.clj")
+(def REMOTE_TASKS "https://raw.githubusercontent.com/eoliphan/holy-lambda/master/modules/holy-lambda-babashka-tasks/src/holy_lambda/tasks.clj")
 (def TASKS_VERSION "0.1.49")
 (def TASKS_VERSION_MATCH #"(?:TASKS_VERSION) (\"[0-9]*\.[0-9]*\.[0-9]*\")")
 (def BUCKET_IN_LS_REGEX #"(?:[0-9- :]+)(.*)")
@@ -1132,7 +1132,7 @@ set -e
   []
   (print-task "docker:build:ee")
   (hpr  (accent "Building GraalVM EE docker image"))
-  (spit "Dockerfile.ee" (:body (curl/get "https://raw.githubusercontent.com/FieryCod/holy-lambda/master/docker/ee/Dockerfile")))
+  (spit "Dockerfile.ee" (:body (curl/get "https://raw.githubusercontent.com/eoliphant/holy-lambda/master/docker/ee/Dockerfile")))
   (hpr (str  "docker build . " (when (:network DOCKER) (str "--network=" (:network DOCKER))) " -f Dockerfile.ee -t fierycod/graalvm-native-image:ee"))
   (shell (str  "docker build . " (when (:network DOCKER) (str "--network=" (:network DOCKER))) " -f Dockerfile.ee -t fierycod/graalvm-native-image:ee"))
   (shell "rm -rf Dockerfile.ee"))
